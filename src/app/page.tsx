@@ -1,63 +1,72 @@
 'use client';
 
-import { Section, Cell, Image, List } from '@telegram-apps/telegram-ui';
-import { useTranslations } from 'next-intl';
-
-import { Link } from '@/components/Link/Link';
-import { LocaleSwitcher } from '@/components/LocaleSwitcher/LocaleSwitcher';
-import { Page } from '@/components/Page';
-
-import tonSvg from './_assets/ton.svg';
+import { useTelegram } from '@telegram-apps/sdk-react';
+import Link from 'next/link';
 
 export default function Home() {
-  const t = useTranslations('i18n');
+  const { initData } = useTelegram();
+  const userName = initData?.user?.firstName || 'сотрудник';
 
   return (
-    <Page back={false}>
-      <List>
-        <Section
-          header="Features"
-          footer="You can use these pages to learn more about features, provided by Telegram Mini Apps and other useful projects"
+    <div className="min-h-screen bg-gray-950 text-white p-6">
+      {/* Важный дисклеймер */}
+      <div className="bg-red-950/60 p-4 rounded-xl mb-6 text-sm border border-red-800">
+        <strong>Важно:</strong> Только официальные источники (pravo.gov.ru, consultant.ru).  
+        Неофициальный справочник. Не является юридической консультацией и не заменяет служебные инструкции.
+      </div>
+
+      {/* Приветствие */}
+      <h1 className="text-3xl font-bold mb-2">Служебный Справочник</h1>
+      <p className="text-gray-400 mb-8">Добро пожаловать, {userName}</p>
+
+      {/* Главное меню — карточки */}
+      <div className="grid grid-cols-1 gap-5">
+        {/* Кнопка Законы и кодексы */}
+        <Link 
+          href="/laws"
+          className="bg-gradient-to-r from-blue-900 to-indigo-900 p-6 rounded-2xl hover:from-blue-800 hover:to-indigo-800 transition-all shadow-lg"
         >
-          <Link href="/ton-connect">
-            <Cell
-              before={
-                <Image
-                  src={tonSvg.src}
-                  style={{ backgroundColor: '#007AFF' }}
-                  alt="TON Logo"
-                />
-              }
-              subtitle="Connect your TON wallet"
-            >
-              TON Connect
-            </Cell>
-          </Link>
-        </Section>
-        <Section
-          header="Application Launch Data"
-          footer="These pages help developer to learn more about current launch information"
+          <h2 className="text-2xl font-bold mb-2">📜 Законы и кодексы</h2>
+          <p className="text-gray-300">
+            ФЗ «О полиции», УК, КоАП, УПК, ФЗ №342, Дисциплинарный устав
+          </p>
+          <p className="text-blue-400 mt-4 text-right">→</p>
+        </Link>
+
+        {/* Другие пункты (можно добавить позже) */}
+        <Link 
+          href="/procedures"
+          className="bg-gradient-to-r from-green-900 to-teal-900 p-6 rounded-2xl hover:from-green-800 hover:to-teal-800 transition-all shadow-lg"
         >
-          <Link href="/init-data">
-            <Cell subtitle="User data, chat information, technical data">
-              Init Data
-            </Cell>
-          </Link>
-          <Link href="/launch-params">
-            <Cell subtitle="Platform identifier, Mini Apps version, etc.">
-              Launch Parameters
-            </Cell>
-          </Link>
-          <Link href="/theme-params">
-            <Cell subtitle="Telegram application palette information">
-              Theme Parameters
-            </Cell>
-          </Link>
-        </Section>
-        <Section header={t('header')} footer={t('footer')}>
-          <LocaleSwitcher />
-        </Section>
-      </List>
-    </Page>
+          <h2 className="text-2xl font-bold mb-2">📋 Памятки и алгоритмы</h2>
+          <p className="text-gray-300">
+            Применение силы, задержание, досмотр, оформление материалов
+          </p>
+          <p className="text-green-400 mt-4 text-right">→</p>
+        </Link>
+
+        <Link 
+          href="/situations"
+          className="bg-gradient-to-r from-purple-900 to-pink-900 p-6 rounded-2xl hover:from-purple-800 hover:to-pink-800 transition-all shadow-lg"
+        >
+          <h2 className="text-2xl font-bold mb-2">⚡ Типовые ситуации</h2>
+          <p className="text-gray-300">
+            Наркотики, пьяный водитель, семейное насилие и др.
+          </p>
+          <p className="text-purple-400 mt-4 text-right">→</p>
+        </Link>
+
+        <Link 
+          href="/search"
+          className="bg-gradient-to-r from-amber-900 to-orange-900 p-6 rounded-2xl hover:from-amber-800 hover:to-orange-800 transition-all shadow-lg"
+        >
+          <h2 className="text-2xl font-bold mb-2">🔍 Поиск и закладки</h2>
+          <p className="text-gray-300">
+            Поиск по словам, фильтры, избранное
+          </p>
+          <p className="text-amber-400 mt-4 text-right">→</p>
+        </Link>
+      </div>
+    </div>
   );
 }
