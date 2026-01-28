@@ -89,7 +89,7 @@ export default function MemosPage() {
             padding: '25px',
             borderRadius: '15px',
             boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
-            borderLeft: '6px solid '#007AFF''
+            borderLeft: '6px solid #007AFF'
           }}>
             <div style={{display: 'flex', alignItems: 'center', gap: '20px'}}>
               <div style={{
