@@ -57,7 +57,7 @@ export default function LawsPage() {
             padding: '25px',
             borderRadius: '15px',
             boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
-            borderLeft: '6px solid '#2E8B57''
+            borderLeft: '6px solid #2E8B57'
           }}>
             <div style={{display: 'flex', alignItems: 'center', gap: '20px'}}>
               <div style={{
